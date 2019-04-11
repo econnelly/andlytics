@@ -1,19 +1,5 @@
 package com.github.andlyticsproject.chart;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import org.achartengine.ChartFactory;
-import org.achartengine.chart.BarChart.Type;
-import org.achartengine.chart.PointStyle;
-import org.achartengine.renderer.XYMultipleSeriesRenderer;
-import org.achartengine.renderer.XYMultipleSeriesRenderer.Orientation;
-import org.achartengine.renderer.XYSeriesRenderer;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
@@ -22,6 +8,21 @@ import android.view.View;
 
 import com.github.andlyticsproject.Preferences;
 import com.github.andlyticsproject.R;
+
+import org.achartengine.chart.BarChart.Type;
+import org.achartengine.chart.PointStyle;
+import org.achartengine.renderer.XYMultipleSeriesRenderer;
+import org.achartengine.renderer.XYMultipleSeriesRenderer.Orientation;
+import org.achartengine.renderer.XYSeriesRenderer;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+//import org.achartengine.ChartFactory;
 
 public class Chart extends AbstractChart {
 
@@ -37,10 +38,10 @@ public class Chart extends AbstractChart {
 	/*
 	 * public enum AdmobChartType { REVENUE, EPC,REQUESTS, CLICKS, FILL_RATE,
 	 * ECPM, IMPRESSIONS, CTR, HOUSEAD_CLICKS }
-	 * 
+	 *
 	 * public enum DownloadChartType { TOTAL_DOWNLAODS, ACTIVE_INSTALLS_TOTAL,
 	 * TOTAL_DOWNLAODS_BY_DAY, ACTIVE_INSTALLS_PERCENT }
-	 * 
+	 *
 	 * public enum RatingChartType { AVG_RATING, RATINGS_5, RATINGS_4,
 	 * RATINGS_3, RATINGS_2, RATINGS_1 }
 	 */
@@ -56,7 +57,7 @@ public class Chart extends AbstractChart {
 
 	@SuppressLint("SimpleDateFormat")
 	public View buildBarChart(Context context, Object[] appstats, ValueCallbackHander handler,
-			double heighestValue, double lowestValue) {
+							  double heighestValue, double lowestValue) {
 
 		String[] titles = new String[] { "" };
 
@@ -137,6 +138,8 @@ public class Chart extends AbstractChart {
 		renderer.setShowGrid(true);
 		renderer.setAntialiasing(true);
 
+//		BarChart bc = new BarChart(buildBarDataset(titles, values), renderer, Type.DEFAULT);
+
 		return ChartFactory.getBarChartView(context, buildBarDataset(titles, values), renderer,
 				Type.DEFAULT);
 
@@ -154,9 +157,9 @@ public class Chart extends AbstractChart {
 
 		for (int i = 0; i < statsForApp.size(); i++) {
 			Object appInfo = statsForApp.get(i);
-			Calendar calendar = Calendar.getInstance(); 
+			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(handler.getDate(appInfo));
-			calendar.set(Calendar.HOUR_OF_DAY, 0);			
+			calendar.set(Calendar.HOUR_OF_DAY, 0);
 			dates.add(calendar.getTime());
 			if (i > 0) {
 				boolean highlight = handler.isHeilightValue(appInfo, statsForApp.get(i - 1));
@@ -239,7 +242,7 @@ public class Chart extends AbstractChart {
 
 		// settings
 		setChartSettings(context.getResources(), renderer, "", "", "", datesArray[0].getTime()
-				- dateDistance, datesArray[datesArray.length - 1].getTime() + dateDistance,
+						- dateDistance, datesArray[datesArray.length - 1].getTime() + dateDistance,
 				valueDistanceBottom, valueDistanceTop, Color.LTGRAY, Color.BLACK);
 
 		renderer.setYLabels(5);

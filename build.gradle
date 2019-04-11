@@ -1,51 +1,67 @@
 buildscript {
     repositories {
-        mavenCentral()
+        google()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'com.android.tools.build:gradle:3.4.0-rc03'
     }
 }
 
 apply plugin: 'com.android.application'
 
 repositories {
-    mavenCentral()
-    maven { 
+    google()
+    jcenter()
+    maven {
         url "https://repository-achartengine.forge.cloudbees.com/snapshot/"
     }
 }
 
 dependencies {
-    compile "com.android.support:design:22.2.1"
-    compile "org.achartengine:achartengine:1.1.0"
-    compile "ch.acra:acra:4.6.1"
-    compile 'com.google.android.gms:play-services:4.0.30'
-    compile 'org.apache.commons:commons-lang3:3.1'
+    implementation "com.android.support:design:28.0.0"
+    implementation "org.achartengine:achartengine:1.2.0"
+    implementation "ch.acra:acra:4.6.1"
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+//    compile 'com.google.android.gms:play-services:12.0.1'
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
 
-    compile ('com.google.api-client:google-api-client:1.19.0') {
+    implementation ('com.google.api-client:google-api-client:1.19.0') {
         exclude group: 'org.apache.httpcomponents'
         exclude group: 'xpp3'
         exclude group: 'junit'
         exclude group: 'com.google.android'
     }
-    compile 'com.google.api-client:google-api-client-android:1.19.0'
-    compile 'com.google.api-client:google-api-client-gson:1.19.0'
-    compile 'com.google.apis:google-api-services-adsense:v1.4-rev29-1.19.0'
-    compile 'com.google.code.gson:gson:2.1'
-    compile 'net.sf.opencsv:opencsv:2.3'
-    compile 'com.google.code.findbugs:jsr305:1.3.9'
+    implementation 'com.google.api-client:google-api-client-android:1.19.0'
+    implementation 'com.google.api-client:google-api-client-gson:1.19.0'
+    implementation 'com.google.apis:google-api-services-adsense:v1.4-rev29-1.19.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'net.sf.opencsv:opencsv:2.3'
+    implementation 'com.google.code.findbugs:jsr305:1.3.9'
 }
 
 android {
 
-	compileSdkVersion 22
-	buildToolsVersion "23.0.3"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        versionCode 284
+        versionName "2.8.0-BETA1"
+
+        minSdkVersion 21
+        targetSdkVersion 28
+    }
 
     // lintOptions {
     //     checkReleaseBuilds false
     //     abortOnError false
     // }
+
+    flavorDimensions "default"
+    productFlavors {
+        free {}
+    }
 
 
     signingConfigs {
@@ -73,7 +89,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_6
     }
 
-	sourceSets {
+    sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src']
